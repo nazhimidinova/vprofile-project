@@ -22,6 +22,24 @@ pipeline {
             steps {
                 sh 'mvn -s settings.xml -DskipTests install'
             }
+            post {
+                success {
+                    echo "Now archiving..."
+                    archiveArtifacts artifacts: '**/*.war'
+                }
+            }
+        }
+/// Unit test stage will generate report that will be uploaded later on SonarQube
+        stage('Test'){
+            steps {
+                sh 'mvn test'
+            }
+        }
+/// Code analysis tool that will check code
+        stage('Checkstyle Analysis'){
+            steps {
+                sh 'mvn checkstyle:checkstyle'
+            }
         }
     }
 }
