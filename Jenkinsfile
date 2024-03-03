@@ -32,13 +32,13 @@ pipeline {
 /// Unit test stage will generate report that will be uploaded later on SonarQube
         stage('Test'){
             steps {
-                sh 'mvn test'
+                sh 'mvn -s settings.xml test'
             }
         }
 /// Code analysis tool that will check code
         stage('Checkstyle Analysis'){
             steps {
-                sh 'mvn checkstyle:checkstyle'
+                sh 'mvn -s settings.xml checkstyle:checkstyle'
             }
         }
     }
