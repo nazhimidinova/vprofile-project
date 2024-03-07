@@ -75,7 +75,7 @@ pipeline {
                 }
             }
         }
-/// Upload artifact to Nexus
+/// Upload artifact
         stage("UploadArtifact"){
             steps{
                 nexusArtifactUploader(
