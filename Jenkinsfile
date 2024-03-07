@@ -35,19 +35,19 @@ pipeline {
                 }
             }
         }
-/// Unit test stage will generate report that will be uploaded later on SonarQube
+/// This stage ensures that the project passes its unit tests.
         stage('Test'){
             steps {
                 sh 'mvn -s settings.xml test'
             }
         }
-/// Code analysis tool that will check code
+/// Checkstyle is a tool for checking Java code against a set of coding standards.
         stage('Checkstyle Analysis'){
             steps {
                 sh 'mvn -s settings.xml checkstyle:checkstyle'
             }
         }
-/// Code to analyze your code and upload to sonarserver
+/// This stage provides insights into code quality, security, and maintainability and upload to sonarserver
         stage('Sonar Analysis') {
             environment {
                 scannerHome = tool "${SONARSCANNER}"
