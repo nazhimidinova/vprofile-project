@@ -112,7 +112,7 @@ pipeline {
             steps {
                 script {
                     //registry information it will login to registry and store all the information and access push method and give a build number tag
-                    docker.withReqistry( vprofileRegistry, registryCredential ) {
+                    docker.withRegistry( vprofileRegistry, registryCredential ) {
                         dockerImage.push("$BUILD_NUMBER")
                         dockerImage.push('latest')
                     }
