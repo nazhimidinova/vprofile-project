@@ -26,6 +26,8 @@ pipeline {
         appRegistry = '923589561384.dkr.ecr.us-east-1.amazonaws.com/vprofileappimg'
         ///url of registry
         vprofileRegistry = "https://923589561384.dkr.ecr.us-east-1.amazonaws.com"
+        cluster = "vprostagin1"
+        service = "vproappstagesvc"
     }
 
     stages {
@@ -119,7 +121,14 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to ESC staging') {
+            steps {
+                withAWS(credentials: 'awscreds', region: 'us-east-1') {
+                    sh 'aws ecs update-service --cluster ${cluster} --service ${service} --force-new-deployment'
+            }
+        }
     }
+}
 /// Sen Slack Notification
     post {
         always {
