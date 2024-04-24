@@ -7,7 +7,7 @@ RUN git clone https://github.com/devopshydclub/vprofile-project.git
 #mvn will generate artifact
 RUN cd vprofile-project && git checkout docker && mvn install
 
-#Copy artifcat
+#Second Image
 FROM tomcat:9-jre11
 #delete the default image
 RUN rm -rf /usr/local/tomcat/webapps/*
