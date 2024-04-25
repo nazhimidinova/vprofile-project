@@ -1,4 +1,3 @@
-###
 ### Prerequisites
 #
 - JDK 11 
